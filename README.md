@@ -15,6 +15,6 @@ Este es mi primer proyecto tanto en PHP como en wordpress, he intentado seguir l
 
 # Documentacion
 
-- IBM Weather Channel, documentacion de la API: de WU https://docs.google.com/document/d/1KGb8bTVYRsNgljnNH67AMhckY8AQT2FVwZ9urj8SWBs/edit
+- IBM Weather Channel, documentacion de la API de WU: https://docs.google.com/document/d/1KGb8bTVYRsNgljnNH67AMhckY8AQT2FVwZ9urj8SWBs/edit
 - Get data from nested JSON: https://docs.google.com/document/d/1KGb8bTVYRsNgljnNH67AMhckY8AQT2FVwZ9urj8SWBs/edit
 - A efectos de desarrollo PHP descubri este fantastico IDE en linea: https://paiza.io/
