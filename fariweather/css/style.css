@@ -1,0 +1,8 @@
+.Farigola_Weather_Widget {
+    background-image: url('http://localhost/mysite/wp-content/plugins/fariweather/includes/images/logo-farigola.jpg');
+    background-color: #cccccc; 
+    height: 500px; 
+    background-position: center;
+    background-repeat: no-repeat; 
+    background-size: cover;
+}
