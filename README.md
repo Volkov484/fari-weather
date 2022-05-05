@@ -1,4 +1,4 @@
-# fari-weather[CAT]
+# fari-weather [CAT]
 Projecte per crear un widget per connectar l'estació meteorologica del col·legi.
 Es tracta d'una estació metorològica que treballa amb Weather Underground, busqui algun connector que funcionés per poder mostrar els valors en temps real de l'estació meteorològica del col·legi, en no trobar-ne cap per wordpress va decidir crear-ne un.
 Aquest és el meu primer projecte tant a PHP com a wordpress, he intentat seguir les convencions de noms i els estils de programació, però queda evident que és un treball amateur.
@@ -10,8 +10,8 @@ Aquest és el meu primer projecte tant a PHP com a wordpress, he intentat seguir
 3. Triem el fitxer fariweather.zip que és on està el plugin.
 4. Cliquem el botó “Instal·lar Ara”.
 5. Activem el plugin.
-6. Per afegir el giny l'afegim com qualsevol altre giny, busquem el que segell “El temps a la Farigola”.
-7. Un cop posat el giny on volem obrim la configuració clicant a sobre i hem de posar la clau API de l'estació i la ID de l'estació, la resta d'opcions es poden deixar per defecte o canviar el títol i mostrar/ocultar les lectures .
+6. Per afegir el widget l'afegim com qualsevol altre widget, busquem el que segell “El temps a la Farigola”.
+7. Un cop posat el widget on volem obrim la configuració clicant a sobre i hem de posar la clau API de l'estació i la ID de l'estació, la resta d'opcions es poden deixar per defecte o canviar el títol i mostrar/ocultar les lectures.
 
 # Documentació
 
