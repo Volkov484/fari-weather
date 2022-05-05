@@ -1,6 +1,6 @@
 # fari-weather [CAT]
 Projecte per crear un widget per connectar l'estació meteorologica del col·legi.
-Es tracta d'una estació metorològica que treballa amb Weather Underground, busqui algun connector que funcionés per poder mostrar els valors en temps real de l'estació meteorològica del col·legi, en no trobar-ne cap per wordpress va decidir crear-ne un.
+Es tracta d'una estació metorològica que treballa amb Weather Underground, vaig buscar algun connector que funcionés per poder mostrar els valors en temps real de l'estació meteorològica del col·legi, en no trobar-ne cap per wordpress vaig decidir crear-ne un.
 Aquest és el meu primer projecte tant a PHP com a wordpress, he intentat seguir les convencions de noms i els estils de programació, però queda evident que és un treball amateur.
 
 # Manual d'instal·lació de plugin fariweather
