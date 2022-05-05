@@ -20,7 +20,7 @@ Aquest és el meu primer projecte tant a PHP com a wordpress, he intentat seguir
 - A efectes de desenvolupament PHP descobreix aquest fantàstic IDE en linia: https://paiza.io/
 
 
-# fari-weather[ES]
+# fari-weather [ES]
 Proyecto para crear un widget para conectar la estacion meteorologica del colegio.
 Se trata de una estacion metorologica que trabaja con Weather Underground, busque algun plugin que funcionase para poder mostrar los valores en tiempo real de la estacion meteorologica del colegio, al no encontrar ninguno para wordpress decidi crear uno.
 Este es mi primer proyecto tanto en PHP como en wordpress, he intentado seguir las convenciones de nombres y los estilos de programacion, pero queda evidente que es un trabajo amateur.
@@ -42,7 +42,7 @@ Este es mi primer proyecto tanto en PHP como en wordpress, he intentado seguir l
 - A efectos de desarrollo PHP descubri este fantastico IDE en linea: https://paiza.io/
 
 
-# fari-weather[EN]
+# fari-weather [EN]
 Project to create a widget to connect the school's weather station.
 It is a weather station that works with Weather Underground, I looked for a plugin that worked to be able to show the values ​​in real time of the school's weather station, not finding any for wordpress I decided to create one.
 This is my first project in both PHP and wordpress, I have tried to follow the naming conventions and programming styles, but it is evident that it is an amateur job.
