@@ -30,7 +30,7 @@ class Farigola_Weather_Widget extends WP_Widget {
 			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
 		}
         //Widget Content Output
-		$json = file_get_contents('https://api.weather.com/v2/pws/observations/current?stationId='.$instance['estacio'].'&format=json&units=m&apiKey='.$instance['apikey'].'');
+		$json = file_get_contents('https://api.weather.com/v2/pws/observations/current?stationId='.$instance['estacio'].'&format=json&units=m&numericPrecision=decimal&apiKey='.$instance['apikey'].'');
 		$array = json_decode($json, true, 5);
 
 		$humidity = $array['observations']['0']['humidity'];
@@ -43,6 +43,9 @@ class Farigola_Weather_Widget extends WP_Widget {
 		$precipRate = $array['observations']['0']['metric']['precipRate'];
 		$precipTotal = $array['observations']['0']['metric']['precipTotal'];
 		$dewpt = $array['observations']['0']['metric']['dewpt'];
+		$obsTimeLocal = $array['observations']['0']['obsTimeLocal'];
+		$sec = strtotime($obsTimeLocal);
+		$localTime = date("d-m-Y H:i", $sec);
 		if ($uv<3):
 			$uvindex = '<font color="#27AE60">BAIX</font>';
 		elseif($uv<6):
@@ -92,11 +95,15 @@ class Farigola_Weather_Widget extends WP_Widget {
 		endif;
 
 		
-		echo '  
+		echo'
 		<div style="background-image: url('.plugin_dir_url( dirname( __FILE__ ) ).'includes/images/logo-farigola.jpg);
 		background-repeat: no-repeat;
-		background-position: top right;
-		background-size: 25% 50%;">
+		background-position: top left;
+		background-origin: content-box;
+		">
+		<br>
+		<br>
+		<br>
 		<div id="temperatura" style="display:'.$instance['temperatura'].'">
   		<b>Temperatura:</b>&nbsp;'.$temp.'°C
 		</div>
@@ -116,17 +123,23 @@ class Farigola_Weather_Widget extends WP_Widget {
   		<b>Ratxa de vent:</b>&nbsp;'.$windGust.'&nbsp;Km/h
   		</div>
 		<div id="indexuv" style="display:'.$instance['indexuv'].'">
-  		<b>Index UV:</b>&nbsp;'.$uv.'&nbsp;<b>'.$uvindex.'</b>
+  		<b>Index UV:</b>&nbsp;'.$uvindex.'
   		</div>
 		<div id="preciphora" style="display:'.$instance['preciphora'].'">
-  		<b>Precipitacions ultima hora:</b>&nbsp;'.$precipRate.'&nbsp;mm
+  		<b>Taxa de precipitació:</b>&nbsp;'.$precipRate.'&nbsp;mm/hr
   		</div>
 		<div id="precipavui" style="display:'.$instance['precipavui'].'">
-  		<b>Precipitacions avui:</b>&nbsp;'.$precipTotal.'&nbsp;mm
+  		<b>Precipitació acumulada:</b>&nbsp;'.$precipTotal.'&nbsp;mm
   		</div>
 		<div id="rosada" style="display:'.$instance['rosada'].'">
   		<b>Punt de rosada:</b>&nbsp;'.$dewpt.'°C
-  		</div
+  		</div>
+		<div id="hora" style="display:'.$instance['hora'].'">
+  		<b>Hora de dades:</b>&nbsp;'.$localTime.'
+  		</div>
+		<div id="WUlink" style="display:'.$instance['WUlink'].'">
+		<span style="font-size: small;"><i>Per a més informació i històrics podeu clicar <a href="https://www.wunderground.com/dashboard/pws/'.$instance['estacio'].'">aquí</a></i></span>
+		</div>
 		</div>
 		';
 
@@ -180,13 +193,19 @@ class Farigola_Weather_Widget extends WP_Widget {
 		$rosada= ! empty( $instance['rosada'] ) ? 
 		$instance['rosada'] : esc_html__( '', 'fw_domain' );
 
+		$hora= ! empty( $instance['hora'] ) ? 
+		$instance['hora'] : esc_html__( '', 'fw_domain' );
+
+		$WUlink= ! empty( $instance['WUlink'] ) ? 
+		$instance['WUlink'] : esc_html__( '', 'fw_domain' );
+
 
 		?>
 	
         <!-- TITLE -->
 		<p>
 		    <label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>">
-                <?php esc_attr_e( 'Title:', 'fw_domain' ); ?>
+                <?php esc_attr_e( 'Títol:', 'fw_domain' ); ?>
         </label> 
 		    <input 
             class="widefat" 
@@ -358,7 +377,7 @@ class Farigola_Weather_Widget extends WP_Widget {
 		<!-- PRECIPITACIONS ULTIMA HORA -->
 				<p>
 		    <label for="<?php echo esc_attr( $this->get_field_id( 'preciphora' ) ); ?>">
-                <?php esc_attr_e( 'Precipitacions ultima hora:', 'fw_domain' ); ?>
+                <?php esc_attr_e( 'Taxa de precipitació:', 'fw_domain' ); ?>
         </label> 
 
 		<select 
@@ -377,7 +396,7 @@ class Farigola_Weather_Widget extends WP_Widget {
 		<!-- PRECIPITACIONS AVUI -->
 				<p>
 		    <label for="<?php echo esc_attr( $this->get_field_id( 'precipavui' ) ); ?>">
-                <?php esc_attr_e( 'Precipitacions avui:', 'fw_domain' ); ?>
+                <?php esc_attr_e( 'Precipitació acumulada:', 'fw_domain' ); ?>
         </label> 
 
 		<select 
@@ -407,6 +426,44 @@ class Farigola_Weather_Widget extends WP_Widget {
 			ON
 			</option>
 			<option value="none;" <?php echo ($rosada == "none;") ? 'selected' : ''; ?>>
+			OFF
+			</option>
+		</select>
+		</p>
+
+		<!-- HORA -->WUlink
+				<p>
+		    <label for="<?php echo esc_attr( $this->get_field_id( 'hora' ) ); ?>">
+                <?php esc_attr_e( 'Hora de dades:', 'fw_domain' ); ?>
+        </label> 
+
+		<select 
+            class="widefat" 
+            id="<?php echo esc_attr( $this->get_field_id( 'hora' ) ); ?>" 
+            name="<?php echo esc_attr( $this->get_field_name( 'hora' ) ); ?>" >
+			<option value="" <?php echo ($hora == "") ? 'selected' : ''; ?>>
+			ON
+			</option>
+			<option value="none;" <?php echo ($hora == "none;") ? 'selected' : ''; ?>>
+			OFF
+			</option>
+		</select>
+		</p>
+
+		<!-- ENLLAÇ -->
+		<p>
+		    <label for="<?php echo esc_attr( $this->get_field_id( 'WUlink' ) ); ?>">
+                <?php esc_attr_e( 'Enllaç a la estació:', 'fw_domain' ); ?>
+        </label> 
+
+		<select 
+            class="widefat" 
+            id="<?php echo esc_attr( $this->get_field_id( 'WUlink' ) ); ?>" 
+            name="<?php echo esc_attr( $this->get_field_name( 'WUlink' ) ); ?>" >
+			<option value="" <?php echo ($WUlink == "") ? 'selected' : ''; ?>>
+			ON
+			</option>
+			<option value="none;" <?php echo ($hora == "none;") ? 'selected' : ''; ?>>
 			OFF
 			</option>
 		</select>
@@ -455,6 +512,10 @@ class Farigola_Weather_Widget extends WP_Widget {
 		$instance['precipavui'] = ( ! empty( $new_instance['precipavui'] ) ) ? sanitize_text_field( $new_instance['precipavui'] ) : '';
 
 		$instance['rosada'] = ( ! empty( $new_instance['rosada'] ) ) ? sanitize_text_field( $new_instance['rosada'] ) : '';
+
+		$instance['hora'] = ( ! empty( $new_instance['hora'] ) ) ? sanitize_text_field( $new_instance['hora'] ) : '';
+
+		$instance['WUlink'] = ( ! empty( $new_instance['WUlink'] ) ) ? sanitize_text_field( $new_instance['WUlink'] ) : '';
 		
 		return $instance;
 	}
